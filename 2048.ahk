@@ -2,9 +2,9 @@
 #Persistent
 #NoTrayIcon
 
-Arr := [["","",""],["","",""],["","",""]]
+Arr := [["2","2","2"],["2","2","2"],["4","2","4"]]
 
-RandomBlock(Arr)
+;RandomBlock(Arr)
 
 SqR1C1 := Arr.1.1
 SqR1C2 := Arr.1.2
@@ -41,6 +41,7 @@ return
 
 UP:: ;up arrow key
 {
+
 	KeyPress(Arr)
 	;MsgBox, Up
 	return 
@@ -48,26 +49,81 @@ UP:: ;up arrow key
 
 DOWN:: ;down arrow key
 {
-	;Arr.2.1 := Arr.1.1
-	;Arr.1.1 := ""
-	;MsgBox, % Arr.1.1 
-	;MsgBox, % Arr.2.1
-	KeyPress(Arr)
-	;MsgBox, Down 
+
+	for index, row in Arr ;looping through rows
+	{
+		if A_Index = 2 ;we start at the 2nd row
+		{
+			for index, val in row ;looping through second row 
+			{ 
+				if val != ;if value is not empty 
+				{
+					col := A_Index ;get column position of value 
+					
+					if (Arr[3][col] = "" ) ;if value below is empty 
+					{
+						;we move the value to the position below 
+						Arr[3][col] := Arr[2][col]
+						Arr[2][col] := ""
+						continue  
+					}
+					if Arr[3][col] = Arr[2][col] ;if element below is same as value
+					{
+						;we add the two values together in bottom space 
+						Arr[3][col] := Arr[3][col] * 2
+						Arr[2][col] := ""
+						continue  
+					}
+				}
+			} 
+
+		}	
+		if A_Index = 2 ;finish looping if done with 2nd row 
+			break  
+	}
+
+	for index, row in Arr 
+	{
+		if A_Index = 1 ;same as above,but for first row 
+		{
+			for index, val in row 
+			{
+				if val !=
+				{
+					col := A_Index 
+
+					if (Arr[2][col] = "" ) 
+					{ 
+						Arr[2][col] := Arr[1][col]
+						Arr[1][col] := ""
+						continue  
+					}
+					if Arr[2][col] = Arr[1][col]
+					{
+						Arr[2][col] := Arr[2][col] * 2
+						Arr[1][col] := ""
+						continue  
+					}
+				}
+			} 
+
+		}	
+		if A_Index = 1
+			break  
+	}
+	KeyPress(Arr) 
 	return 
 }
 
 LEFT:: ;left arrow key
 {
 	KeyPress(Arr)
-	;MsgBox, Left 
 	return
 }
 
 RIGHT:: ;right arrow key 
 {
-	KeyPress(Arr)
-	;MsgBox, Right 
+	KeyPress(Arr) 
 	return
 }
 
@@ -168,7 +224,7 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 }
 
 KeyPress(byref array) { ;this will execute BoxRedraw and RandomBlock anytime a key is pressed
-	RandomBlock(array)
+	;RandomBlock(array)
 	BoxRedraw()
 	return 
 }
