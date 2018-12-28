@@ -2,11 +2,7 @@
 #Persistent
 #NoTrayIcon
 
-Arr := [["","",""],["","",""],["","",""]]
-
-isArrayChanged := false 
-
-RandomBlock(Arr)
+Arr := [["a","b","c"],["d","e","f"],["g","h","i"]]
 
 SqR1C1 := Arr.1.1
 SqR1C2 := Arr.1.2
@@ -37,414 +33,49 @@ Gui, Add, Edit, x666 y666 w333 h333 ReadOnly vR3C3, % Arr.3.3
 
 Gui, Show, w999 h999, Test 
 
+RandomBlock(Arr)
+
 return 
 
 ;this is the controls section
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UP ARROW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 UP:: ;up arrow key
 {
-	isArrayChanged := false
-	for index, row in Arr ;looping through rows
-	{
-		if A_Index = 2 ;we start at the 2nd row
-		{
-			for index, val in row ;looping through second row 
-			{ 
-				if val != ;if value is not empty 
-				{
-					col := A_Index ;get column position of value 
-					
-					if (Arr[1][col] = "" ) ;if value below is empty 
-					{
-						;we move the value to the position below 
-						Arr[1][col] := Arr[2][col]
-						Arr[2][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-					if Arr[1][col] = Arr[2][col] ;if element below is same as value
-					{
-						;we add the two values together in bottom space 
-						Arr[1][col] := Arr[1][col] * 2
-						Arr[2][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-
-				}
-			} 
-
-		}	
-		if A_Index = 2 ;finish looping if done with 2nd row 
-			break  
-	}
-
-	for index, row in Arr 
-	{
-		if A_Index = 3 ;same as above,but for first row 
-		{
-			for index, val in row 
-			{
-				if val !=
-				{
-					col := A_Index 
-
-					if (Arr[2][col] = "" ) 
-					{ 
-						Arr[2][col] := Arr[3][col]
-						Arr[3][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-					if Arr[2][col] = Arr[3][col]
-					{
-						Arr[2][col] := Arr[2][col] * 2
-						Arr[3][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-				}
-			} 
-
-		}	
-		if A_Index = 3
-			break  
-	}
-
-	for index, row in Arr ;looping through rows
-	{
-		if A_Index = 2 ;we start at the 2nd row
-		{
-			for index, val in row ;looping through second row 
-			{ 
-				if val != ;if value is not empty 
-				{
-					col := A_Index ;get column position of value 
-					
-					if (Arr[1][col] = "" ) ;if value below is empty 
-					{
-						;we move the value to the position below 
-						Arr[1][col] := Arr[2][col]
-						Arr[2][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-					if Arr[1][col] = Arr[2][col] ;if element below is same as value
-					{
-						;we add the two values together in bottom space 
-						Arr[1][col] := Arr[1][col] * 2
-						Arr[2][col] := ""
-						isArrayChanged := true 
-						continue  
-					}
-				}
-			} 
-
-		}	
-		if A_Index = 2 ;finish looping if done with 2nd row 
-			break  
-	}
-
-	if isArrayChanged = 1 
-		KeyPress(Arr)	
+	;KeyPress()
+	RandomBlock(Arr)
+	MsgBox, Up
 	return 
 }
 
-DOWN:: ;down arrow key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; DOWN ARROW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DOWN:: ;down arrow key
 {
-	isArrayChanged := false 
-	for index, row in Arr ;looping through rows
-	{
-		if A_Index = 2 ;we start at the 2nd row
-		{
-			for index, val in row ;looping through second row 
-			{ 
-				if val != ;if value is not empty 
-				{
-					col := A_Index ;get column position of value 
-					
-					if (Arr[3][col] = "" ) ;if value below is empty 
-					{
-						;we move the value to the position below 
-						Arr[3][col] := Arr[2][col]
-						Arr[2][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-					if Arr[3][col] = Arr[2][col] ;if element below is same as value
-					{
-						;we add the two values together in bottom space 
-						Arr[3][col] := Arr[3][col] * 2
-						Arr[2][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-				}
-			} 
-
-		}	
-		if A_Index = 2 ;finish looping if done with 2nd row 
-			break  
-	}
-
-	for index, row in Arr 
-	{
-		if A_Index = 1 ;same as above,but for first row 
-		{
-			for index, val in row 
-			{
-				if val !=
-				{
-					col := A_Index 
-
-					if (Arr[2][col] = "" ) 
-					{ 
-						Arr[2][col] := Arr[1][col]
-						Arr[1][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-					if Arr[2][col] = Arr[1][col]
-					{
-						Arr[2][col] := Arr[2][col] * 2
-						Arr[1][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-				}
-			} 
-
-		}	
-		if A_Index = 1
-			break  
-	}
-
-
-
-;you have to loop back through row 2 to get everything you moved down from row 1
-
-
-	for index, row in Arr ;looping through rows
-	{
-		if A_Index = 2 ;we start at the 2nd row
-		{
-			for index, val in row ;looping through second row 
-			{ 
-				if val != ;if value is not empty 
-				{
-					col := A_Index ;get column position of value 
-					
-					if (Arr[3][col] = "" ) ;if value below is empty 
-					{
-						;we move the value to the position below 
-						Arr[3][col] := Arr[2][col]
-						Arr[2][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-					if Arr[3][col] = Arr[2][col] ;if element below is same as value
-					{
-						;we add the two values together in bottom space 
-						Arr[3][col] := Arr[3][col] * 2
-						Arr[2][col] := ""
-						isArrayChanged := true
-						continue  
-					}
-				}
-			} 
-		}	
-		if A_Index = 2 ;finish looping if done with 2nd row 
-			break  
-	}
-	if isArrayChanged = 1
-		KeyPress(Arr) 
+	;Arr.2.1 := Arr.1.1
+	;Arr.1.1 := ""
+	;MsgBox, % Arr.1.1 
+	;MsgBox, % Arr.2.1
+	KeyPress()
+	MsgBox, Down 
 	return 
 }
 
-LEFT:: ;left arrow key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LEFT ARROW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+LEFT:: ;left arrow key
 {
-	isArrayChanged := false 
-	for index, row in Arr 
-	{
-		rw := A_Index 
-
-		for index, val in row 
-		{
-			if A_Index = 2
-			{
-				if val !=
-				{
-					if(Arr[rw][1] = "")
-					{
-						Arr[rw][1] := Arr[rw][2]
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue
-					}
-					if Arr[rw][2] = Arr[rw][1]
-					{
-						Arr[rw][1] := Arr[rw][1] * 2
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-
-			if A_Index = 3
-			{
-				if val !=
-				{
-					if(Arr[rw][2] = "")
-					{
-						Arr[rw][2] := Arr[rw][3]
-						Arr[rw][3] := ""
-						isArrayChanged := true
-						continue 
-					}
-					if Arr[rw][3] = Arr[rw][2]
-					{
-						Arr[rw][2] := Arr[rw][2] * 2
-						Arr[rw][3] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-		}
-
-	}
-
-	for index, row in Arr 
-	{
-		rw := A_Index 
-
-		for index, val in row 
-		{
-			if A_Index = 2
-			{
-				if val !=
-				{
-					if(Arr[rw][1] = "")
-					{
-						Arr[rw][1] := Arr[rw][2]
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue
-					}
-					if Arr[rw][2] = Arr[rw][1]
-					{
-						Arr[rw][1] := Arr[rw][1] * 2
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-		}	
-	}	
-
-	if isArrayChanged = 1
-		KeyPress(Arr)
+	KeyPress()
+	MsgBox, Left 
 	return
 }
 
-RIGHT:: ;right arrow key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RIGHT ARROW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+RIGHT:: ;right arrow key 
 {
-	isArrayChanged := false 
-	for index, row in Arr 
-	{
-		rw := A_Index 
-
-		for index, val in row 
-		{
-			if A_Index = 2
-			{
-				if val !=
-				{
-					if(Arr[rw][3] = "")
-					{
-						Arr[rw][3] := Arr[rw][2]
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue
-					}
-					if Arr[rw][2] = Arr[rw][3]
-					{
-						Arr[rw][3] := Arr[rw][3] * 2
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-
-			
-		}
-
-
-	}
-
-	for index, row in Arr 
-	{
-		rw := A_Index 
-
-		for index, val in row 
-		{
-			if A_Index = 1
-			{
-				if val !=
-				{
-					if(Arr[rw][2] = "")
-					{
-						Arr[rw][2] := Arr[rw][1]
-						Arr[rw][1] := ""
-						isArrayChanged := true
-						continue 
-					}
-					if Arr[rw][1] = Arr[rw][2]
-					{
-						Arr[rw][2] := Arr[rw][2] * 2
-						Arr[rw][1] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-			if A_Index = 2
-			{
-				if val !=
-				{
-					if(Arr[rw][3] = "")
-					{
-						Arr[rw][3] := Arr[rw][2]
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue
-					}
-					if Arr[rw][2] = Arr[rw][3]
-					{
-						Arr[rw][3] := Arr[rw][3] * 2
-						Arr[rw][2] := ""
-						isArrayChanged := true
-						continue 
-					}
-				}
-			}
-		}	
-	}
-
-	if isArrayChanged = 1
-		KeyPress(Arr) 
+	KeyPress()
+	MsgBox, Right 
 	return
 }
 
 GuiClose: ;when the GUI closes, the entire script closes 
 ExitApp
 
-;----------------------------------- FUNCTIONS -------------------------------------------------------------------------------------------------------------
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;----------------------------------- MOVEMENT FUNCTIONS-------------------------------------------------------------------------------------------------------------
 BoxRedraw() { ;this will cause the GUI to update the boxes and show the values in the array 
 	global 
 	SqR1C1 := Arr.1.1
@@ -477,74 +108,19 @@ BoxRedraw() { ;this will cause the GUI to update the boxes and show the values i
 RandomBlock(byref array) { ;this will create a random 2 block in an empty space 
 	for index1, row in array 
 	{
+		
 		for index2, val in row 
 		{
-			;MsgBox % val
-			if val =
-			{
-				ArrayCount += 1  
-			}
+			MsgBox % val  
 		}
-		;MsgBox, Done with %index1% 
+		MsgBox, Done with %index1% 
 	}
-	;MsgBox % ArrayCount 
-
-
-	;game over screen if no empty spaces are left 
-	if ArrayCount = 
-	{
-		MsgBox, GAME OVER 
-		Exit 
-	}
-
-	Random, rndNum, 1, ArrayCount ;randomly assigns a 2 to empty space 
-	;MsgBox % rndNum 
-	ArrayCount := 0
-
-	for index1, row in array ;loop through to find empty space
-	{
-		for index2, val in row 
-		{
-			if val =
-			{
-				ArrayCount += 1
-				;MsgBox %ArrayCount% : %rndNum%
-			}
-
-			if (ArrayCount = rndNum) ;counts empty space until element equals the randomly generated number
-			{
-				;MsgBox, Column Match : %A_Index%
-				col := A_Index ;gets column index of element
-				break  
-			}
-		}
-
-		if (ArrayCount = rndNum) ;finds the row index of element as well 
-		{ 
-			;MsgBox, Row Match : %A_Index%
-			rw := A_Index 
-			break  
-		}		
-	} 
-	;MsgBox, row: %rw%, column: %col%
-	array[rw][col] := 2 ;appends 2 to the randomly chosen element location 
-	;MsgBox % array%rw%_%col%
-	;herp := join2D(array) 
-	;MsgBox % herp 
-	ArrayCount := 0
-	return 
+	return  
 }
 
-KeyPress(byref array) { ;this will execute BoxRedraw and RandomBlock anytime a key is pressed
-	RandomBlock(array)
+KeyPress() { ;this will execute BoxRedraw and RandomBlock anytime a key is pressed
+	RandomBlock(Arr)
 	BoxRedraw()
 	return 
 }
-
-
-
-
-
-
-
 
