@@ -483,15 +483,6 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 	}
 	;MsgBox % ArrayCount 
 
-
-	;game over screen if no empty spaces are left 
-/*
-	if ArrayCount = 
-	{
-		MsgBox, GAME OVER 
-		Exit 
-	}
-*/
 	Random, rndNum, 1, ArrayCount ;randomly assigns a 2 to empty space 
 	;MsgBox % rndNum 
 	ArrayCount := 0
@@ -524,8 +515,6 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 	;MsgBox, row: %rw%, column: %col%
 	array[rw][col] := 2 ;appends 2 to the randomly chosen element location 
 	;MsgBox % array%rw%_%col%
-	;herp := join2D(array) 
-	;MsgBox % herp 
 	ArrayCount := 0
 
 	;check to see if game over
@@ -542,6 +531,8 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 	}
 
 	isEqual := false 
+
+	BoxRedraw()
 
 	if ArrayCount = 0
 	{
@@ -584,6 +575,7 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 	{
 		if isEqual = 0
 		{
+			sleep 2000
 			MsgBox, GAME OVER!
 			Reload 
 			Exit 
@@ -595,7 +587,7 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 
 KeyPress(byref array) { ;this will execute BoxRedraw and RandomBlock anytime a key is pressed
 	RandomBlock(array)
-	BoxRedraw()
+	;BoxRedraw()
 	return 
 }
 
