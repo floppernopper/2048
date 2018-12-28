@@ -219,8 +219,6 @@ DOWN:: ;down arrow key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; DOWN ARROW ;;;;;;;
 			break  
 	}
 
-
-
 ;you have to loop back through row 2 to get everything you moved down from row 1
 
 
@@ -378,11 +376,7 @@ RIGHT:: ;right arrow key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RIGHT ARROW ;;;;;;;;;;;;
 					}
 				}
 			}
-
-			
 		}
-
-
 	}
 
 	for index, row in Arr 
@@ -491,12 +485,13 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 
 
 	;game over screen if no empty spaces are left 
+/*
 	if ArrayCount = 
 	{
 		MsgBox, GAME OVER 
 		Exit 
 	}
-
+*/
 	Random, rndNum, 1, ArrayCount ;randomly assigns a 2 to empty space 
 	;MsgBox % rndNum 
 	ArrayCount := 0
@@ -532,6 +527,69 @@ RandomBlock(byref array) { ;this will create a random 2 block in an empty space
 	;herp := join2D(array) 
 	;MsgBox % herp 
 	ArrayCount := 0
+
+	;check to see if game over
+	for index1, row in array 
+	{
+		for index2, val in row 
+		{
+			if val =
+			{
+				ArrayCount += 1
+				;MsgBox %ArrayCount% : %rndNum%
+			}
+		}
+	}
+
+	isEqual := false 
+
+	if ArrayCount = 0
+	{
+		for index1, row in array 
+		{
+			
+			rw := A_Index 
+
+			for index2, val in row 
+			{
+				if A_Index = 2
+				{
+					if (array[rw][A_Index] = array[rw][A_Index - 1]) or (array[rw][A_Index] = array[rw][A_Index + 1]) 
+					{
+						isEqual := true 
+						break 
+					}
+				}
+			}
+
+			if A_Index = 2
+			{
+				for index2, val in row 
+				{
+					col := A_Index 
+					if (array[A_Index][col] = array[A_Index - 1][col]) or (array[A_Index][col] = array[A_Index + 1][col])
+					{
+						isEqual := true
+						break
+					}
+				}	
+			}
+
+			if isEqual = 1
+				break 
+		}
+	}
+
+	if ArrayCount = 0 
+	{
+		if isEqual = 0
+		{
+			MsgBox, GAME OVER!
+			Reload 
+			Exit 
+		}
+	}
+
 	return 
 }
 
